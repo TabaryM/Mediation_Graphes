@@ -1,0 +1,882 @@
+\documentclass{article}
+
+\usepackage[french]{babel} % pour qu'il sache qu'on écrit du français
+                           % (et s'adapte sur les espaces etc.)
+\usepackage[utf8]{inputenc} %encodage
+\usepackage{a4wide} % pour avoir de la place sur la feuille (de
+                    % petites marges)
+\usepackage{amsmath}% je l'ai utilisé pour la commande boldsymbol,
+                    % contient plein de symboles matheux
+\usepackage{pgf} % celui-ci et le suivant sont pour les graphes
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}% pour placer un noeud par rapport a un autre
+
+% les deux lignes ci-dessous définissent une macro : après ça je peux
+% utiliser \flg et \fld pour des flèches vers la gauche ou la droite
+\newcommand{\flg}{$\boldsymbol{\leftarrow}$}
+\newcommand{\fld}{$\boldsymbol{\rightarrow}$}
+
+\begin{document}
+\section{Enoncés}
+    % Donjon 1
+    \subsection{Donjon 1}
+        Placez l'entrée au centre de la feuille.
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+              \node[entree] (E0) {Entrée};
+              \node[salle, left=of E0] (J) {J};
+              \node[salle, above=of E0] (F) {F};
+              \node[salle, left=1.5 of F] (X) {X};
+              \node[salle, above=of F] (Y) {Y};
+              \node[salle, right=1.5 of F] (W) {W \\ Trésor};
+              \node[salle, right=of E0] (A) {A};
+              \node[salle, left=of J] (V) {V};
+              \node[salle, below=of J] (S) {S};
+              \node[salle, left=of S] (N) {N \\ Trésor};
+              \node[salle, left=of V] (T) {T};
+              \node[salle, above=of X] (B) {B};
+              \node[salle, left=of B] (Z) {Z};
+              \node[salle, above=of W] (D) {D \\ Trésor};
+              \node[salle, right=of W] (H) {H};
+              \node[salle, right=of A] (L) {L};
+
+              \draw (E0) to (F);
+              \draw (E0) to (A);
+              \draw (E0) to (J);
+              \draw (J) to (V);
+              \draw (J) to (S);
+              \draw (V) to (N);
+              \draw (V) to (T);
+              \draw (S) to (N);
+              \draw [bend right=45](T) to (N);
+              \draw (F) to (X);
+              \draw (F) to (Y);
+              \draw (Y) to (D);
+              \draw (Y) to (B);
+              \draw (B) to (X);
+              \draw (B) to (Z);
+              \draw [bend right=45](Z) to (X);
+              \draw (A) to (W);
+              \draw (A) to (L);
+              \draw (W) to (H);
+              \draw (L) to (H);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 2
+    \subsection{Donjon 2}
+        Placez l'entrée au milieu à gauche de la feuille.
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+              \node[entree] (E0) {Entrée};
+              \node[salle, right=of E0] (A) {A};
+              \node[salle, above=of A] (V) {V};
+              \node[salle, below=of A] (M) {M};
+              \node[salle, right=of A] (R) {R \\ Trésor};
+              \node[salle, right=of M] (H) {H};
+              \node[salle, right=of R] (E) {E};
+              \node[salle, above=of E] (B) {B};
+              \node[salle, right=of E] (Q) {Q \\ Trésor};
+
+              \draw (E0) to (A);
+              \draw (E0.north) [bend left=40] to (V.west);
+              \draw (V) to (B);
+              \draw (B) to (E);
+              \draw (E) to (Q);
+              \draw (A) to (V);
+              \draw (A) to (M);
+              \draw (M) to (H);
+              \draw (H) to (R);
+              \draw (R) to (E);
+              \draw (H.east) [bend right=45] to (E.south);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 3
+    \subsection{Donjon 3}
+        Placez l'entrée au centre de la feuille.
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+              \node[entree] (E0) {Entrée};
+              \node[salle, above=of E0] (A) {A};
+              \node[salle, right=of A] (S) {S \\ Trésor};
+              \node[salle, left=of A] (E) {E};
+              \node[salle, above=of A] (B) {B};
+              \node[salle, left=of B] (P) {P};
+              \node[salle, right=of B] (C) {C};
+              \node[salle, right=of C] (T) {T};
+              \node[salle, below=of E0] (K) {K};
+              \node[salle, right=of K] (D) {D};
+              \node[salle, right=of D] (M) {M};
+              \node[salle, below=of D] (Y) {Y \\ Trésor};
+              \node[salle, left=of K] (U) {U};
+              \node[salle, left=of U] (I) {I};
+              \node[salle, left=of I] (L) {L};
+              \node[salle, below=of U] (N) {N};
+
+              \draw (E0) to (A);
+              \draw (A) to (E);
+              \draw (A) to (B);
+              \draw (B) to (P);
+              \draw (B) to (C);
+              \draw (C) to (S);
+              \draw (C) to (T);
+              \draw (E0) to (K);
+              \draw (K) to (D);
+              \draw (K) [bend left=45] to (N);
+              \draw (N) [bend left=45] to (I);
+              \draw (D) to (M);
+              \draw (D) to (Y);
+              \draw (K) to (U);
+              \draw (U) to (N);
+              \draw (U.north) .. controls +(up:1cm) and +(up:1cm) .. (L.north);
+              \draw (L) to (I);
+              \draw (L.south) .. controls +(down:3cm) and +(down:1cm) .. (N.south);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 4
+    \subsection{Donjon 4}
+        Placez l'entrée au milieu à gauche de la feuille.
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+              \tikzstyle{const}=[minimum width=1.5cm] % noeud de construction invisible
+
+              \node[entree] (E0) {Entrée};
+              \node[salle, above=of E0] (E) {E};
+              \node[salle, right=of E] (V) {V};
+              \node[salle, right=of V] (G) {G};
+              \node[salle, above=of V] (D) {D \\ Trésor};
+              \node[const, above=of D] (const1) {};
+              \node[salle, left=of const1] (Q) {Q};
+              \node[salle, above=of Q] (W) {W};
+              \node[salle, right=of const1] (C) {C};
+              \node[salle, below=of G] (P) {P};
+              \node[salle, below=of P] (F) {F};
+              \node[salle, below=of F] (Y) {Y};
+              \node[salle, right=of F] (K) {K};
+              \node[salle, left=of F] (X) {X};
+              \node[salle, below=of X] (M) {M};
+              \node[salle, left=of M] (A) {A \\ Trésor};
+
+              \draw (E0) to (E);
+              \draw (E0.south) .. controls +(down:0.75cm) .. (X.west);
+              \draw (E) to (Q);
+              \draw (E) to (V);
+              \draw (Q) to (W);
+              \draw (Q) to (C);
+              \draw (C.east) .. controls +(right:1cm) and +(right:1cm) .. (P.east);
+              \draw (V) to (D);
+              \draw (V) to (G);
+              \draw (V) to (X);
+              \draw (X) to (F);
+              \draw (F) to (P);
+              \draw (F) to (K);
+              \draw (F) to (Y);
+              \draw (Y) to (M);
+              \draw (X) to (M);
+              \draw (M) to (A);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 5
+    \subsection{Donjon 5}
+        Placez l'entrée en bas au centre de la feuille.
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+              \tikzstyle{const}=[minimum width=1.5cm] % noeud de construction invisible
+
+              \node[entree] (E0) {Entrée};
+              \node[salle, above left=1.5 of E0] (Z2) {Z2};
+              \node[salle, above right=1.5 of E0] (M) {M};
+              \node[salle, above right=2 of Z2] (J) {J};
+              \node[salle, left=4 of J] (G) {G};
+              \node[salle, right=4 of J] (K) {K};
+              \node[salle, above=2 of K] (H) {H};
+              \node[salle, above=2 of G] (E) {E};
+              \node[salle, above=2 of H] (Z) {Z};
+              \node[salle, above=2 of E] (A) {A};
+              \node[salle, above left=1.5 of J] (N) {N \\ Trésor};
+              \node[salle, above right=1.5 of J] (P) {P \\ Trésor};
+              \node[salle, above=2 of N] (C) {C};
+              \node[salle, above=2 of P] (Y) {Y};
+
+              \draw (E0.west) .. controls +(left:3cm) and +(down:2cm) .. (G.south);
+              \draw (E0.east) .. controls +(right:3cm) and +(down:2cm) .. (K.south);
+              \draw (J.south) .. controls +(down:1.5cm) and +(right:0.5cm) .. (Z2.east);
+              \draw (J.south) .. controls +(down:1.5cm) and +(left:0.5cm) .. (M.west);
+              \draw (G) to (J);
+              \draw (K) to (J);
+              \draw (G) to (E);
+              \draw (K) to (H);
+              \draw (E) to (A);
+              \draw (H) to (Z);
+              \draw (C) to (N);
+              \draw (Y) to (P);
+              \draw (E.east) .. controls +(right:1.5cm) and +(left:1.5cm) .. (C.west);
+              \draw (H.west) .. controls +(left:1.5cm) and +(right:1.5cm) .. (Y.east);
+              \draw (A.east) .. controls +(right:1.75cm) and +(up:0.5cm) .. (C.north);
+              \draw (Z.west) .. controls +(left:1.75cm) and +(up:0.5cm) .. (Y.north);
+              \draw (C) to (Y);
+        \end{tikzpicture}
+
+\newpage
+\section{Corrections}
+    % Donjon 1
+    \subsection{Donjon 1}
+        {\bf Parcours en largeur}
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+              \node[entree, label=135:0, label=45:0] (E0) {Entrée};
+              \node[salle, label=135:1, label=45:3, left=of E0] (J) {J};
+              \node[salle, label=135:1, label=45:1, above=of E0] (F) {F};
+              \node[salle, label=135:2, label=45:5, left=1.5 of F] (X) {X};
+              \node[salle, label=135:2, label=45:4, above=of F] (Y) {Y};
+              \node[salle, label=135:2, label=45:6, right=1.5 of F] (W) {W \\ Trésor};
+              \node[salle, label=135:1, label=45:2, right=of E0] (A) {A};
+              \node[salle, label=135:2, label=45:9, left=of J] (V) {V};
+              \node[salle, label=135:2, label=45:8, below=of J] (S) {S};
+              \node[salle, label=135:3, label=45:14, left=of S] (N) {N \\ Trésor};
+              \node[salle, label=135:3, label=45:15, left=of V] (T) {T};
+              \node[salle, label=135:3, label=45:11, above=of X] (B) {B};
+              \node[salle, label=135:4, label=45:12, left=of B] (Z) {Z};
+              \node[salle, label=135:3, label=45:10, above=of W] (D) {D \\ Trésor};
+              \node[salle, label=135:3, label=45:13, right=of W] (H) {H};
+              \node[salle, label=135:2, label=45:7, right=of A] (L) {L};
+
+              \draw (E0) to node [near start, sloped, above] {\fld} (F);
+              \draw (E0) to node [near start, sloped, above] {\fld} (A);
+              \draw (E0) to node [near start, sloped, above] {\flg} (J);
+              \draw (J) to node [near start, sloped, above] {\flg} (V);
+              \draw (J) to node [near start, sloped, above] {\fld} (S);
+              \draw (V) to (N);
+              \draw (V) to node [near start, sloped, above] {\flg} (T);
+              \draw (S) to node [near start, sloped, above] {\flg} (N);
+              \draw [bend right=45](T) to (N);
+              \draw (F) to node [near start, sloped, above] {\flg} (X);
+              \draw (F) to (Y);
+              \draw (Y) to node [near start, sloped, above] {\fld} (D);
+              \draw (Y) to node [near start, sloped, above] {\flg} (B);
+              \draw (B) to (X);
+              \draw (B) to (Z);
+              \draw [bend left=45](X.west) to node [very near start, sloped, below] {\flg} (Z.south);
+              \draw (A) to node [near start, sloped, above] {\flg} (W);
+              \draw (A) to node [near start, sloped, above] {\fld} (L);
+              \draw (W) to node [near start, sloped, above] {\fld} (H);
+              \draw (L) to (H);
+        \end{tikzpicture}
+
+        \newpage
+        {\bf Parcours en profondeur}\\
+        Nombre de portes traversées: \\
+        En suivant l'algorithme : 34 \\
+        Au mieux : 25
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10, minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:11, left=of E0] (J) {J};
+            \node[salle, label=45:1, above=of E0] (F) {F};
+            \node[salle, label=45:5, left=1.5 of F] (X) {X};
+            \node[salle, label=45:2, above=of F] (Y) {Y};
+            \node[salle, label=45:8, right=1.5 of F] (W) {W \\ Trésor};
+            \node[salle, label=45:7, right=of E0] (A) {A};
+            \node[salle, label=45:14, left=of J] (V) {V};
+            \node[salle, label=45:12, below=of J] (S) {S};
+            \node[salle, label=45:13, left=of S] (N) {N \\ Trésor};
+            \node[salle, label=45:15, left=of V] (T) {T};
+            \node[salle, label=45:4, above=of X] (B) {B};
+            \node[salle, label=45:6, left=of B] (Z) {Z};
+            \node[salle, label=45:3, above=of W] (D) {D \\ Trésor};
+            \node[salle, label=45:9, right=of W] (H) {H};
+            \node[salle, label=45:10, right=of A] (L) {L};
+
+            \draw (E0) to node [near start, sloped, above] {\fld} (F);
+            \draw (E0) to node [near start, sloped, above] {\fld} (A);
+            \draw (E0) to node [near start, sloped, above] {\flg} (J);
+            \draw (J) to (V);
+            \draw (J) to node [near start, sloped, above] {\fld} (S);
+            \draw (N) to node [near start, sloped, above] {\fld} (V);
+            \draw (V) to node [near start, sloped, above] {\flg} (T);
+            \draw (S) to node [near start, sloped, above] {\flg} (N);
+            \draw [bend right=45](T) to (N);
+            \draw (F) to (X);
+            \draw (F) to node [near start, sloped, above] {\fld} (Y);
+            \draw (Y) to node [near start, sloped, above] {\fld} (D);
+            \draw (Y) to node [near start, sloped, above] {\flg} (B);
+            \draw (B) to node [near start, sloped, above] {\fld} (X);
+            \draw (B) to (Z);
+            \draw [bend left=45](X.west) to node [very near start, sloped, below] {\flg} (Z.south);
+            \draw (A) to node [near start, sloped, below] {\flg} (W);
+            \draw (A) to (L);
+            \draw (W) to node [near start, sloped, below] {\fld} (H);
+            \draw (L) to node [near end, sloped, below] {\fld} (H);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 2
+    \subsection{Donjon 2}
+        {\bf Parcours en largeur}
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+            \node[entree, label=135:0, label=45:0] (E0) {Entrée};
+            \node[salle, label=135:1, label=45:2, right=of E0] (A) {A};
+            \node[salle, label=135:1, label=45:1, above=of A] (V) {V};
+            \node[salle, label=135:2, label=45:4, below=of A] (M) {M};
+            \node[salle, label=135:4, label=45:8, right=of A] (R) {R \\ Trésor};
+            \node[salle, label=135:3, label=45:6, right=of M] (H) {H};
+            \node[salle, label=135:3, label=45:5, right=of R] (E) {E};
+            \node[salle, label=135:2, label=45:3, above=of E] (B) {B};
+            \node[salle, label=135:4, label=45:7, right=of E] (Q) {Q \\ Trésor};
+
+            \draw (E0) to node [near start, sloped, above] {\fld} (A);
+            \draw (E0.north) [bend left=40] to node [very near start, sloped, above] {\fld} (V.west);
+            \draw (V) to node [pos=0.1, sloped, above] {\fld} (B);
+            \draw (B) to node [near start, sloped, above] {\fld} (E);
+            \draw (E) to node [near start, sloped, above] {\fld} (Q);
+            \draw (A) to (V);
+            \draw (A) to node [near start, sloped, above] {\fld} (M);
+            \draw (M) to node [near start, sloped, above] {\fld} (H);
+            \draw (H) to (R);
+            \draw (E) to node [near start, sloped, above] {\flg} (R);
+            \draw (E.south) [bend left=45] to (H.east);
+        \end{tikzpicture}
+
+        \bigskip
+        {\bf Parcours en profondeur}\\
+        Nombre de portes traversées: \\
+        En suivant l'algorithme : 14 \\
+        Au mieux : 14
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:8, right=of E0] (A) {A};
+            \node[salle, label=45:1, above=of A] (V) {V};
+            \node[salle, label=45:7, below=of A] (M) {M};
+            \node[salle, label=45:6, right=of A] (R) {R \\ Trésor};
+            \node[salle, label=45:5, right=of M] (H) {H};
+            \node[salle, label=45:3, right=of R] (E) {E};
+            \node[salle, label=45:2, above=of E] (B) {B};
+            \node[salle, label=45:4, right=of E] (Q) {Q \\ Trésor};
+
+            \draw (E0) to (A);
+            \draw (E0.north) [bend left=40] to node [very near start, sloped, above] {\fld} (V.west);
+            \draw (V) to node [pos=0.1, sloped, above] {\fld} (B);
+            \draw (B) to node [near start, sloped, above] {\fld} (E);
+            \draw (E) to node [near start, sloped, above] {\fld} (Q);
+            \draw (A) to (V);
+            \draw (M) to node [near start, sloped, above] {\fld} (A);
+            \draw (H) to node [near start, sloped, above] {\flg} (M);
+            \draw (H) to node [near start, sloped, above] {\fld} (R);
+            \draw (R) to (E);
+            \draw (E.south) [bend left=45] to node [very near start, sloped, below] {\flg} (H.east);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 3
+    \subsection{Donjon 3}
+        {\bf Parcours en largeur}
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+
+            \node[entree, label=135:0, label=45:0] (E0) {Entrée};
+            \node[salle, label=135:1, label=45:1, above=of E0] (A) {A};
+            \node[salle, label=135:4, label=45:15, right=of A] (S) {S \\ Trésor};
+            \node[salle, label=135:2, label=45:4, left=of A] (E) {E};
+            \node[salle, label=135:2, label=45:3, above=of A] (B) {B};
+            \node[salle, label=135:3, label=45:9, left=of B] (P) {P};
+            \node[salle, label=135:3, label=45:8, right=of B] (C) {C};
+            \node[salle, label=135:4, label=45:14, right=of C] (T) {T};
+            \node[salle, label=135:1, label=45:2, below=of E0] (K) {K};
+            \node[salle, label=135:2, label=45:5, right=of K] (D) {D};
+            \node[salle, label=135:3, label=45:10, right=of D] (M) {M};
+            \node[salle, label=135:3, label=45:11, below=of D] (Y) {Y \\ Trésor};
+            \node[salle, label=135:2, label=45:7, left=of K] (U) {U};
+            \node[salle, label=135:3, label=45:13, left=of U] (I) {I};
+            \node[salle, label=135:3, label=45:12, left=of I] (L) {L};
+            \node[salle, label=135:2, label=45:6, below=of U] (N) {N};
+
+            \draw (E0) to node [near start, sloped, above] {\fld} (A);
+            \draw (A) to node [near start, sloped, above] {\flg} (E);
+            \draw (A) to node [near start, sloped, above] {\fld} (B);
+            \draw (B) to node [near start, sloped, above] {\flg} (P);
+            \draw (B) to node [near start, sloped, above] {\fld} (C);
+            \draw (C) to node [near start, sloped, above] {\fld} (S);
+            \draw (C) to node [near start, sloped, above] {\fld} (T);
+            \draw (E0) to node [near start, sloped, above] {\fld} (K);
+            \draw (K) to node [near start, sloped, above] {\fld} (D);
+            \draw (K) [bend left=45] to node [very near start, sloped, below] {\flg} (N);
+            \draw (N) [bend left=45] to node [very near start, sloped, above] {\flg} (I);
+            \draw (D) to node [near start, sloped, above] {\fld} (M);
+            \draw (D) to node [near start, sloped, above] {\fld} (Y);
+            \draw (K) to node [near start, sloped, above] {\flg} (U);
+            \draw (U) to (N);
+            \draw (U.north) .. controls +(up:1cm) and +(up:1cm) .. (L.north);
+            \draw (L) to (I);
+            \draw (L.south) .. controls +(down:3cm) and +(down:1cm) .. node [very near end, sloped, below] {\flg} (N.south);
+        \end{tikzpicture}
+
+        \newpage
+        {\bf Parcours en profondeur}\\
+        Nombre de portes traversées: \\
+        En suivant l'algorithme : 32 \\
+        Au mieux : 29
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, above=of E0] (A) {A};
+            \node[salle, label=45:5, right=of A] (S) {S \\ Trésor};
+            \node[salle, label=45:7, left=of A] (E) {E};
+            \node[salle, label=45:2, above=of A] (B) {B};
+            \node[salle, label=45:6, left=of B] (P) {P};
+            \node[salle, label=45:3, right=of B] (C) {C};
+            \node[salle, label=45:4, right=of C] (T) {T};
+            \node[salle, label=45:8, below=of E0] (K) {K};
+            \node[salle, label=45:9, right=of K] (D) {D};
+            \node[salle, label=45:10, right=of D] (M) {M};
+            \node[salle, label=45:11, below=of D] (Y) {Y \\ Trésor};
+            \node[salle, label=45:13, left=of K] (U) {U};
+            \node[salle, label=45:15, left=of U] (I) {I};
+            \node[salle, label=45:14, left=of I] (L) {L};
+            \node[salle, label=45:12, below=of U] (N) {N};
+
+            \draw (E0) to node [near start, sloped, above] {\fld} (A);
+            \draw (A) to node [near start, sloped, above] {\flg} (E);
+            \draw (A) to node [near start, sloped, above] {\fld} (B);
+            \draw (B) to node [near start, sloped, above] {\flg} (P);
+            \draw (B) to node [near start, sloped, above] {\fld} (C);
+            \draw (C) to node [near start, sloped, above] {\fld} (S);
+            \draw (C) to node [near start, sloped, above] {\fld} (T);
+            \draw (E0) to node [near start, sloped, above] {\fld} (K);
+            \draw (K) to node [near start, sloped, above] {\fld} (D);
+            \draw (K) [bend left=45] to node [very near start, sloped, below] {\flg} (N);
+            \draw (N) [bend left=45] to (I);
+            \draw (D) to node [near start, sloped, above] {\fld} (M);
+            \draw (D) to node [near start, sloped, above] {\fld} (Y);
+            \draw (K) to (U);
+            \draw (N) to node [near start, sloped, above] {\fld} (U);
+            \draw (U.north) .. controls +(up:1cm) and +(up:1cm) .. node [very near start, sloped, above] {\flg} (L.north);
+            \draw (L) to node [near start, sloped, above] {\fld} (I);
+            \draw (L.south) .. controls +(down:3cm) and +(down:1cm) .. (N.south);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 4
+    \subsection{Donjon 4}
+        {\bf Parcours en largeur}
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+            \tikzstyle{const}=[minimum width=1.5cm] % noeud de construction invisible
+
+            \node[entree, label=135:0, label=45:0] (E0) {Entrée};
+            \node[salle, label=135:1, label=45:1, above=of E0] (E) {E};
+            \node[salle, label=135:2, label=45:4, right=of E] (V) {V};
+            \node[salle, label=135:3, label=45:10, right=of V] (G) {G};
+            \node[salle, label=135:3, label=45:9, above=of V] (D) {D \\ Trésor};
+            \node[const, above=of D] (const1) {};
+            \node[salle, label=135:2, label=45:3, left=of const1] (Q) {Q};
+            \node[salle, label=135:3, label=45:7, above=of Q] (W) {W};
+            \node[salle, label=135:3, label=45:8, right=of const1] (C) {C};
+            \node[salle, label=135:3, label=45:11, below=of G] (P) {P};
+            \node[salle, label=135:2, label=45:5, below=of P] (F) {F};
+            \node[salle, label=135:3, label=45:13, below=of F] (Y) {Y};
+            \node[salle, label=135:3, label=45:12, right=of F] (K) {K};
+            \node[salle, label=135:1, label=45:2, left=of F] (X) {X};
+            \node[salle, label=135:2, label=45:6, below=of X] (M) {M};
+            \node[salle, label=135:3, label=45:14, left=of M] (A) {A \\ Trésor};
+
+            \draw (E0) to node [near start, sloped, above] {\fld} (E);
+            \draw (E0.south) .. controls +(down:0.75cm) .. node [near start, sloped, below] {\fld} (X.west);
+            \draw (E) to  node [pos=0.1, sloped, above] {\fld}(Q);
+            \draw (E) to node [near start, sloped, above] {\fld} (V);
+            \draw (Q) to node [near start, sloped, above] {\fld} (W);
+            \draw (Q) to  node [pos=0.1, sloped, above] {\fld}(C);
+            \draw (C.east) .. controls +(right:1cm) and +(right:1cm) .. (P.east);
+            \draw (V) to node [near start, sloped, above] {\fld} (D);
+            \draw (V) to node [near start, sloped, above] {\fld} (G);
+            \draw (V) to (X);
+            \draw (X) to node [near start, sloped, above] {\fld} (F);
+            \draw (F) to node [near start, sloped, above] {\fld} (P);
+            \draw (F) to node [near start, sloped, above] {\fld} (K);
+            \draw (F) to node [near start, sloped, above] {\fld} (Y);
+            \draw (Y) to (M);
+            \draw (X) to node [near start, sloped, above] {\fld} (M);
+            \draw (M) to node [near start, sloped, above] {\flg} (A);
+        \end{tikzpicture}
+
+        \newpage
+        {\bf Parcours en profondeur}\\
+        Nombre de portes traversées: \\
+        En suivant l'algorithme : 26 \\
+        Au mieux : 24
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+              \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                                 , minimum width=2.5cm]
+              \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+              \tikzstyle{const}=[minimum width=1.5cm] % noeud de construction invisible
+
+                \node[entree, label=45:0] (E0) {Entrée};
+                \node[salle, label=45:1, above=of E0] (E) {E};
+                \node[salle, label=45:11, right=of E] (V) {V};
+                \node[salle, label=45:13, right=of V] (G) {G};
+                \node[salle, label=45:12, above=of V] (D) {D \\ Trésor};
+                \node[const, above=of D] (const1) {};
+                \node[salle, label=45:2, left=of const1] (Q) {Q};
+                \node[salle, label=45:3, above=of Q] (W) {W};
+                \node[salle, label=45:4, right=of const1] (C) {C};
+                \node[salle, label=45:5, below=of G] (P) {P};
+                \node[salle, label=45:6, below=of P] (F) {F};
+                \node[salle, label=45:8, below=of F] (Y) {Y};
+                \node[salle, label=45:7, right=of F] (K) {K};
+                \node[salle, label=45:10, left=of F] (X) {X};
+                \node[salle, label=45:9, below=of X] (M) {M};
+                \node[salle, label=45:14, left=of M] (A) {A \\ Trésor};
+
+              \draw (E0) to node [near start, sloped, above] {\fld} (E);
+              \draw (E0.south) .. controls +(down:0.75cm) .. (X.west);
+              \draw (E) to node [pos=0.1, sloped, above] {\fld} (Q);
+              \draw (E) to (V);
+              \draw (Q) to node [near start, sloped, above] {\fld} (W);
+              \draw (Q) to node [pos=0.1, sloped, above] {\fld} (C);
+              \draw (C.east) .. controls +(right:1cm) and +(right:1cm) .. node [very near start, sloped, above] {\fld} (P.east);
+              \draw (V) to node [near start, sloped, above] {\fld} (D);
+              \draw (V) to node [near start, sloped, above] {\fld} (G);
+              \draw (X) to node [pos=0.1, sloped, above] {\fld} (V);
+              \draw (F) to (X);
+              \draw (P) to node [near start, sloped, above] {\fld} (F);
+              \draw (F) to node [near start, sloped, above] {\fld} (K);
+              \draw (F) to node [near start, sloped, above] {\fld} (Y);
+              \draw (Y) to node [near start, sloped, above] {\flg} (M);
+              \draw (M) to node [near start, sloped, above] {\fld} (X);
+              \draw (M) to node [near start, sloped, above] {\flg} (A);
+        \end{tikzpicture}
+
+    \newpage
+    % Donjon 5
+    \subsection{Donjon 5}
+        {\bf Parcours en largeur}
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+            \node[entree, label=135:0, label=45:0] (E0) {Entrée};
+            \node[salle, label=135:3, label=45:9, above left=1.5 of E0] (Z2) {Z2};
+            \node[salle, label=135:3, label=45:8, above right=1.5 of E0] (M) {M};
+            \node[salle, label=135:2, label=45:4, above right=2 of Z2] (J) {J};
+            \node[salle, label=135:1, label=45:2, left=4 of J] (G) {G};
+            \node[salle, label=135:1, label=45:1, right=4 of J] (U) {U};
+            \node[salle, label=135:2, label=45:3, above=2 of U] (H) {H};
+            \node[salle, label=135:2, label=45:5, above=2 of G] (E) {E};
+            \node[salle, label=135:3, label=45:6, above=2 of H] (Z) {Z};
+            \node[salle, label=135:3, label=45:11, above=2 of E] (A) {A};
+            \node[salle, label=135:4, label=45:13, above left=1.5 of J] (N) {N \\ Trésor};
+            \node[salle, label=135:4, label=45:12, above right=1.5 of J] (P) {P \\ Trésor};
+            \node[salle, label=135:3, label=45:10, above=2 of N] (C) {C};
+            \node[salle, label=135:3, label=45:7, above=2 of P] (Y) {Y};
+
+            \draw (E0.west) .. controls +(left:3cm) and +(down:2cm) .. node [pos=0.05, sloped, below] {\flg} (G.south);
+            \draw (E0.east) .. controls +(right:3cm) and +(down:2cm) .. node [pos=0.05, sloped, below] {\fld} (U.south);
+            \draw (J.south) .. controls +(down:1.5cm) and +(right:0.5cm) .. node [very near start, sloped, above] {\flg} (Z2.east);
+            \draw (J.south) .. controls +(down:1.5cm) and +(left:0.5cm) .. node [very near start, sloped, above] {\fld} (M.west);
+            \draw (G) to (J);
+            \draw (U) to node [pos=0.1, sloped, above] {\flg} (J);
+            \draw (G) to node [near start, sloped, above] {\fld} (E);
+            \draw (U) to node [near start, sloped, above] {\fld} (H);
+            \draw (E) to node [near start, sloped, above] {\fld} (A);
+            \draw (H) to node [near start, sloped, above] {\fld} (Z);
+            \draw (C) to node [near start, sloped, above] {\fld} (N);
+            \draw (Y) to node [near start, sloped, above] {\fld} (P);
+            \draw (E.east) .. controls +(right:1.5cm) and +(left:1.5cm) .. node [very near start, sloped, below] {\fld} (C.west);
+            \draw (H.west) .. controls +(left:1.5cm) and +(right:1.5cm) .. node [very near start, sloped, below] {\flg} (Y.east);
+            \draw (A.east) .. controls +(right:1.75cm) and +(up:0.5cm) .. (C.north);
+            \draw (Z.west) .. controls +(left:1.75cm) and +(up:0.5cm) .. (Y.north);
+            \draw (C) to (Y);
+        \end{tikzpicture}
+
+        \newpage
+        {\bf Parcours en profondeur}\\
+        Nombre de portes traversées: \\
+        En suivant l'algorithme : 23 \\
+        Au mieux : 23
+        \bigskip
+
+        %Rose des vents
+        \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+            \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+                \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+            }
+            \draw[arrows={->[scale=1]}] (N) -- (S);
+            \draw[arrows={->[scale=1]}] (S) -- (N);
+            \draw[arrows={->[scale=1]}] (E) -- (W);
+            \draw[arrows={->[scale=1]}] (W) -- (E);
+        \end{tikzpicture}
+
+        \bigskip
+
+        \begin{tikzpicture}
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm, align=center]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:12, above left=1.5 of E0] (Z2) {Z2};
+            \node[salle, label=45:11, above right=1.5 of E0] (M) {M};
+            \node[salle, label=45:10, above right=2 of Z2] (J) {J};
+            \node[salle, label=45:9, left=4 of J] (G) {G};
+            \node[salle, label=45:1, right=4 of J] (U) {U};
+            \node[salle, label=45:2, above=2 of U] (H) {H};
+            \node[salle, label=45:8, above=2 of G] (E) {E};
+            \node[salle, label=45:3, above=2 of H] (Z) {Z};
+            \node[salle, label=45:7, above=2 of E] (A) {A};
+            \node[salle, label=45:13, above left=1.5 of J] (N) {N \\ Trésor};
+            \node[salle, label=45:5, above right=1.5 of J] (P) {P \\ Trésor};
+            \node[salle, label=45:6, above=2 of N] (C) {C};
+            \node[salle, label=45:4, above=2 of P] (Y) {Y};
+
+            \draw (E0.west) .. controls +(left:3cm) and +(down:2cm) .. (G.south);
+            \draw (E0.east) .. controls +(right:3cm) and +(down:2cm) .. node [pos=0.05, sloped, below] {\fld} (U.south);
+            \draw (J.south) .. controls +(down:1.5cm) and +(right:0.5cm) .. node [very near start, sloped, above] {\flg} (Z2.east);
+            \draw (J.south) .. controls +(down:1.5cm) and +(left:0.5cm) .. node [very near start, sloped, above] {\fld} (M.west);
+            \draw (G) to node [near start, sloped, above] {\fld} (J);
+            \draw (U) to (J);
+            \draw (E) to node [near start, sloped, above] {\fld} (G);
+            \draw (U) to node [near start, sloped, above] {\fld} (H);
+            \draw (A) to node [near start, sloped, above] {\fld} (E);
+            \draw (H) to node [near start, sloped, below] {\fld} (Z);
+            \draw (C) to node [near start, sloped, above] {\fld} (N);
+            \draw (Y) to node [near start, sloped, above] {\fld} (P);
+            \draw (E.east) .. controls +(right:1.5cm) and +(left:1.5cm) .. (C.west);
+            \draw (H.west) .. controls +(left:1.5cm) and +(right:1.5cm) .. (Y.east);
+            \draw (A.east) .. controls +(right:1.75cm) and +(up:0.5cm) .. node [very near end, sloped, above] {\flg} (C.north);
+            \draw (Z.west) .. controls +(left:1.75cm) and +(up:0.5cm) .. node [very near start, sloped, above] {\flg} (Y.north);
+            \draw (Y) to node [near start, sloped, above] {\flg} (C);
+        \end{tikzpicture}
+
+\end{document}

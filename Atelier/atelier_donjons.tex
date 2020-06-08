@@ -1,0 +1,532 @@
+\documentclass{article}
+\usepackage[french]{babel} % pour qu'il sache que c'est du français et s'adapte pour les espaces etc.
+\usepackage[utf8]{inputenc} % pour le codage du fichier, on peut aussi mettre latin-1
+\usepackage{amsmath, amssymb} % pour charger des symboles en plus
+\usepackage{a4wide}
+\usepackage{changepage}
+\usepackage{fancyhdr} % Pour la mise en page des en-tête et pieds de pages
+
+\usepackage{hyperref} % pour les liens vers une page web avec la commande \url
+
+\usepackage{pgf} % celui-ci et le suivant sont pour les graphes
+\usepackage{tikz}
+\usetikzlibrary{positioning}% pour placer un noeud par rapport a un autre
+
+% Package ajoutant la licence de partage et d'utilisation du document
+\usepackage[
+    type={CC},
+    modifier={by},
+    version={4.0},
+]{doclicense}
+
+% Pour ajouter le logo aux pieds de pages
+\usepackage[scale=2.0]{ccicons}
+
+% Creation du pied de page :
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{\ccby}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\flg}{$\boldsymbol{\leftarrow}$}
+\newcommand{\fld}{$\boldsymbol{\rightarrow}$}
+\newcommand{\mj}{Maître du Jeu}
+
+\title{Qu'y a-t'il dans ce donjon ?}
+\author{Mathieu Tabary}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+Cette activité a été créée lors d'un stage de L3 Informatique à l'Universitée de Lorraine.
+
+Le stage a été effectué au sein de l'équipe VERIDIS, sous la supervision de Marie Duflot-Kremer, au LORIA (Laboratoire Lorrain de Recherche en Informatique et ses Applications).
+
+Ce stage a été financé par Google.
+
+\doclicenseThis
+
+\part{Concept}
+    L'objectif de cette activité est de faire découvrir à des élèves de lycée le fonctionnement des algorithmes de parcours en profondeur et de parcours en largeur.
+
+    Cette activité se repose sur l'exploration de donjons. Ces donjons seront représentés par des graphes constitués de salles (Sommets) et de couloirs (Arêtes).
+
+
+    \bigskip
+    Pour cette activité, deux rôles sont a remplir : le rôle de l'Aventurier, et le rôle du \mj. Les deux élèves échangeront de rôles au cours de l'activité.
+
+    L'aventurier va chercher tous les trésors des donjons, pour cela il doit explorer le donjon dans son intégralité (pour avoir la garantie de n'en manquer aucuns), avec comme seules informations ce que lui dit le \mj.
+
+    Le \mj\ doit décrire à l'aventurier le donjon (que seul le \mj\ peut voir), au fur et à mesure de l'exploration.
+
+\part{Materiel et Mise en place}
+    Vous aurez besoin, pour chaque groupe de deux élèves de :
+    \begin{itemize}
+        \item Graphes planaires (des graphes dont les arêtes ne se croisent pas).\\
+        Vous pourrez trouver des exemples de donjons dans les fiches d'activité, construits avec le package Tikz en \LaTeX{}.
+        \item D'un pion (un bouton de couture, ou une pièce d'un jeu de plateau).
+        \item Une ou plusieurs feuilles et un stylo.
+    \end{itemize}
+
+    \bigskip
+    Donnez, pour chaque groupe, au \mj\ un donjon, et à l'aventurier le pion, une feuille et un stylo.
+
+\newpage
+
+\part{Déroulement}
+    \section{Familliarisation avec l'environnement}
+
+        \emph{5 minutes environ}
+
+        Pensez à bien expliquer les règles suivantes :
+        \begin{itemize}
+            \item L'aventurier doit explorer le donjon dans son intégralité.
+            \item Le \mj\ est le seul à voir le donjon.
+        \end{itemize}
+        \bigskip
+
+        \emph{15 minutes environ}
+
+        Dans un premier temps, on laissera chaque élèves explorer un donjon Facile comme ils le souhaitent.
+
+        L'aventurier est dans le donjons, donc l'élève l'incarnant devra déplacer le pion pour montrer la salle dans laquelle il est.
+
+    \section{Mise en commun}
+        \emph{10 minutes environ}
+
+        L'objectif de la mise en commun est de faire trouver aux élèves un algorithme permettant d'explorer un donjon en intégralité, tout en essayant de réduire les déplacements. C'est un algorithme de parcours en profondeur.
+
+        Une fois qu'un algorithme est trouvé, la classe peut se remettre en groupe de 2 pour l'appliquer, et peut-être essayer de l'améliorer.
+
+    \section{Parcours en largeur}
+        \emph{10 minutes environ}
+
+        A partir de maintenant, le nombre de couloirs que taverse l'aventurier ne nous intéresse plus. Il n'est plus nécessaire d'utiliser le pion.
+
+        On appelera "distance à l'entrée" d'une salle, le nombre de couloirs à traverser pour aller de cette salle à l'entrée.
+
+        L'objectif de l'aventurier est désormais de trouver la distance à l'entrée de toutes les salles. Cela peut se compter sur un donjon déjà cartographié, mais il est possible de trouver cette information en même temps que l'on explore le donjon.
+
+        On va donc chercher à créer un algorithme permettant d'explorer intégralement le donjon, tout en comptant la distance à l'entrée de chaque salles. On peut s'inspirer de l'algorithme de parcours en profondeur trouvé précédement.
+
+\newpage
+\part{Activité détaillée}
+    \section{Interactions entre l'Aventurier et le \mj}
+        Si l'objectif de l'aventurier est d'explorer tout le donjon pour être sur de ne rater aucuns trésors, l'objectif du \mj\ n'est pas de l'en empêcher. Même s'ils ne travaillent pas ensemble, ils ne sont pas en concurence!\\
+        Vous pouvez trouver un exemple d'exploration complet plus bas dans ce document (\autoref{sec:Exemple}).\\
+
+        Lorsque l'aventurier annonce qu'il va explorer une salle, il dois dire depuis laquelle il part, et dans quelle direction. Par exemple, dans cette partie de donjon :\bigskip
+
+        \noindent \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[circle, minimum width=1.5cm]
+
+            \node[salle] (A) {A};
+            \node[construction, left=of A] (const0) {};
+            \node[construction, below=of A] (const1) {};
+            \node[construction, right=of A] (const2) {};
+
+            \draw (A) to (const0);
+            \draw (A) to (const1);
+            \draw (A) to (const2);
+        \end{tikzpicture}
+
+        Pour explorer vers l'Est il devra dire :
+        L'aventurier dire "Depuis la salle A, j'emprunte la porte Est."
+
+        Ce à quoi va répondre le \mj\ : "Tu arrive dans la salle B depuis la porte Ouest. Il y a une porte qui va vers le Sud."
+
+        Et voici ce que va dessiner l'aventurier : \newline \bigskip
+
+        \noindent \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[circle, minimum width=1.5cm]
+
+            \node[salle] (A) {A};
+            \node[salle, right=of A] (B) {B};
+            \node[construction, left=of A] (const0) {};
+            \node[construction, below=of A] (const1) {};
+            \node[construction, below=of B] (const2) {};
+
+            \draw (A) to (B);
+            \draw (A) to (const0);
+            \draw (A) to (const1);
+            \draw (B) to (const2);
+        \end{tikzpicture}
+
+        Vous aurez sûrment remarqué, que le \mj\ a précisé depuis quel direction l'aventurier arrive dans la salle. C'est parceque tous les couloirs ne sont pas droits, certains sont incurvés.
+
+        Par exemple, si l'aventurier dit "J'explore le Sud de la salle A",
+        le \mj\ va lui répondre ceci : "Tu avance d'une unité vers le Sud, puis d'une unité vers l'Ouest, et tu arrive dans la salle C par l'Est. Il n'y a pas d'autres portes."
+
+        Le \mj\ doit expliquer les distance parcourues par l'aventurier dans les couloirs pour qu'il ne se perde pas dans sa carte.
+
+        Et voici ce que dessine l'aventurier grâce aux indications du \mj\ :
+
+        \noindent \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[circle, minimum width=1.5cm]
+
+            \node[salle] (A) {A};
+            \node[salle, right=of A] (B) {B};
+            \node[construction, left=of A] (const0) {};
+            \node[construction, below=of B] (const3) {};
+            \node[salle, below=of const0] (C) {C};
+
+            \draw (A) to (B);
+            \draw (A) to (const0);
+            \draw (B) to (const3);
+            \draw (A.south) [bend left=45] to (C.east);
+        \end{tikzpicture}
+
+        \bigskip
+        De plus, le \mj\ à précisé qu'il n'y avais pas d'autres portes dans la salle C pour faire gagner du temps à l'aventurier.
+
+    \section{Élaboration des algorithmes}
+        Les indications suivantes peuvent vous aider à faire élaborer un algorithme de parcours en profondeur ou en largeur à votre classe.
+
+        Lors de la prise en main de l'environnement par les élèves, rappelez aux aventuriers qu'ils sont dans le donjon, la où est le pion, cela devrait les aider à trouver l'algorithme de parcours en profondeur et à l'optimiser (une fois une première ébauche d'algorithme aura été trouvée).
+
+        Si vous voyez l'aventurier noter une liste de salles à explorer, souvenez-vous du groupe qui l'a fait pour lui demander d'expliquer ce qu'il a fait lors de la mise en commun. C'est une des étapes importantes pour les parcours de graphes.
+
+\part{Lien avec l'informatique}
+    Les graphes sont des modèles abstraits pouvant être utilisé pour représenter des situations ou des problèmes très variés, tel que les réseaux informatiques (Internet), mais aussi les réseaux sociaux (votre famille ou vos amis), ou encore des problèmes d'ordonnancement.
+
+    Ainsi, créer des algorithmes applicables à des graphes permet de résoudre un large champs de problèmes.
+
+\newpage
+\appendix % Les annexes sont ci-dessous
+
+\part{Annexes}
+
+    \section{Exemple d'exploration}
+        \label{sec:Exemple}
+        Voici le donjon qui servira d'exemple : \\
+
+        \bigskip
+
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            % \tikzstyle{construction}=[minimum width=0.5cm]
+
+            \node[entree] (E0) {Entrée};
+            \node[salle, right=of E0] (A) {A};
+            \node[salle, right=of A] (B) {B};
+            \node[salle, right=of B] (C) {C};
+            \node[salle, below=of A] (D) {D};
+            \node[salle, below=of B] (E) {E};
+
+            \draw (E0) to (A);
+            \draw (A) to (B);
+            \draw (A) to (D);
+            \draw (B) to (C);
+            \draw (B) to (E);
+            \draw (C.south) [bend left=45] to (E.east);
+            \draw (E) to (D);
+        \end{tikzpicture}
+        \bigskip
+
+        Pour indiquer les distances depuis une salle de départ et une salle d'arrivée, on mesurera une unité comme la taille d'un couloir + la taille d'une salle.\\
+
+        Les dessins ci-dessous représentent ce que l'aventurier dessine.\\
+
+        Le \mj\ commence en expliquant à l'aventurier : “La salle d’entrée, située en haut a gauche, a une porte vers l’Est.”\\
+        L'aventurier note la salle “Entrée”, numérotée 0, avec une porte vers l’Est :\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{construction}=[minimum width=0.5cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[construction, right=of E0] (const1) {};
+
+            \draw (E0) to (const1);
+        \end{tikzpicture}
+
+        \bigskip
+
+        L'aventurier annonce "J'explore la salle à l'Est de la salle Entrée".\\
+        Le \mj\ explique "Tu arrive dans la salle A depuis la porte Ouest. Il y a une porte à l'Est et une porte au Sud".\\
+        L'aventurier note la salle "A", numérotée 1, liée à la salle "Entrée" par une porte à l'Ouest, avec une porte à l'Est et une porte vers le Sud :\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[minimum width=0.5cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[construction, right=of A] (const1) {};
+            \node[construction, below=of A] (const2) {};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to (const1);
+            \draw (A) to (const2);
+        \end{tikzpicture}
+
+        \bigskip
+
+        L'aventurier annonce "J'explore la salle à l'Est de la salle A".\\
+        Le \mj\ explique "Tu arrive dans la salle B depuis la porte Ouest. Il y a une porte à l'Est et une porte au Sud".\\
+        L'aventurier note la salle "B", numérotée 2, liée à la salle "A" par une porte à l'Ouest, avec une porte à l'Est et une porte vers le Sud :\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[minimum width=0.5cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[salle, label=45:2, right=of A] (B) {B};
+            \node[construction, below=of A] (const1) {};
+            \node[construction, right=of B] (const2) {};
+            \node[construction, below=of B] (const3) {};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to node [near start,sloped,above] {\fld} (B);
+            \draw (A) to (const1);
+            \draw (B) to (const2);
+            \draw (B) to (const3);
+        \end{tikzpicture}
+
+        \bigskip
+
+        L'aventurier annonce "J'explore la salle à l'Est de la salle B".\\
+        Le \mj\ explique "Tu arrive dans la salle C depuis la porte Ouest. Il y a une porte au Sud".\\
+        L'aventurier note la salle "C", numérotée 3, liée à la salle "B" par une porte à l'Ouest, avec une porte vers le Sud :\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[minimum width=0.5cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[salle, label=45:2, right=of A] (B) {B};
+            \node[construction, below=of A] (const1) {};
+            \node[salle, label=45:3, right=of B] (C) {C};
+            \node[construction, below=of B] (const3) {};
+            \node[construction, below=of C] (const2) {};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to node [near start,sloped,above] {\fld} (B);
+            \draw (A) to (const1);
+            \draw (B) to node [near start,sloped,above] {\fld} (C);
+            \draw (B) to (const3);
+            \draw (C) to (const2);
+        \end{tikzpicture}
+
+        \bigskip
+
+        L'aventurier annonce "J'explore la salle au Sud de la salle C."\\
+        Le \mj\ explique : "La salle d'arrivée se trouve à une unité vers le Sud et une unité vers l'Ouest.", l'aventurier devrait donc voir l'a salle E en dessous de la salle B.\\
+        Le \mj\ continue :"C'est la salle E et tu y arrive depuis la porte Est. Il y a une porte au Nord et une porte à l'Ouest."\\
+
+        L'aventurier note la salle "E", numérotée 4, liée à la salle "C" par une porte à l'Est, avec une porte vers le Nord et une porte vers l'Ouest :\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[minimum width=1cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[salle, label=45:2, right=of A] (B) {B};
+            \node[construction, below=of A] (const1) {};
+            \node[salle, label=45:3, right=of B] (C) {C};
+            \node[construction, below=of B] (const3) {};
+            \node[salle, label=45:4, below=of const3] (E) {E};
+            \node[construction, left=of E] (const2) {};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to node [near start,sloped,above] {\fld} (B);
+            \draw (A) to (const1);
+            \draw (B) to node [near start,sloped,above] {\fld} (C);
+            \draw (B) to (const3);
+            \draw (C.south) .. controls +(down:3) and +(right:0.5) .. node [near start,sloped,above] {\flg} (E.east);
+            \draw (E) to (const3);
+            \draw (E) to (const2);
+        \end{tikzpicture}
+
+        L'aventurier annonce "J'explore la salle au Nord de la salle E."\\
+        Le \mj\ explique "Tu arrive dans la salle B depuis la porte Sud."\\
+        L'aventurier note le liens entre les salles "E" et "B":
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[minimum width=1cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[salle, label=45:2, right=of A] (B) {B};
+            \node[construction, below=of A] (const1) {};
+            \node[salle, label=45:3, right=of B] (C) {C};
+            \node[construction, below=of B] (const3) {};
+            \node[salle, label=45:4, below=of const3] (E) {E};
+            \node[construction, left=of E] (const2) {};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to node [near start,sloped,above] {\fld} (B);
+            \draw (A) to (const1);
+            \draw (B) to node [near start,sloped,above] {\fld} (C);
+            \draw (B) to (E);
+            \draw (C.south) .. controls +(down:3) and +(right:0.5) .. node [near start,sloped,above] {\flg} (E.east);
+            \draw (E) to (const2);
+        \end{tikzpicture}
+
+        \bigskip
+
+        L'aventurier annonce "J'explore la salle à l'Ouest de la salle E."\\
+        Le \mj\ explique "Tu arrive dans la salle D depuis la porte Est. Il y a une porte vers le Nord"\\
+        L'aventurier note la salle "D", numérotée 5, liée à la salle "E" par une porte à l'Est, avec une porte vers le Nord :\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            \tikzstyle{construction}=[minimum width=1cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[salle, label=45:2, right=of A] (B) {B};
+            \node[construction, below=of A] (const1) {};
+            \node[salle, label=45:3, right=of B] (C) {C};
+            \node[construction, below=of B] (const3) {};
+            \node[salle, label=45:4, below=of const3] (E) {E};
+            \node[salle, label=45:5, left=of E] (D) {D};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to node [near start,sloped,above] {\fld} (B);
+            \draw (A) to (const1);
+            \draw (B) to node [near start,sloped,above] {\fld} (C);
+            \draw (B) to (E);
+            \draw (C.south) .. controls +(down:3) and +(right:0.5) .. node [near start,sloped,above] {\flg} (E.east);
+            \draw (E) to node [near start,sloped,above] {\flg} (D);
+            \draw (D) to (const1);
+        \end{tikzpicture}
+
+        \bigskip
+
+        Étant donné que toutes les salles du donjon sont notées par l'aventurier, on pourrait croire que la cartographie est finie. Mais ce n'est pas le cas! Il reste encore deux portes qui n'ont pas été ouvertes, on ne peut pas être sûr d'où elle vont mener.\\
+        L'aventurier annonce "J'explore la salle au Nord de la salle D."\\
+        Le \mj\ explique "Tu arrive dans la salle A depuis la porte Sud."\\
+        L'aventurier note le liens entre les salles "D" et "A":\\
+
+        \bigskip
+        \begin{tikzpicture}
+            % Les styles utilisé pour visualiser les salles
+            \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=2.5cm]
+            \tikzstyle{salle}=[circle, draw, minimum width=1.5cm]
+            % \tikzstyle{construction}=[minimum width=0.5cm]
+
+            \node[entree, label=45:0] (E0) {Entrée};
+            \node[salle, label=45:1, right=of E0] (A) {A};
+            \node[salle, label=45:2, right=of A] (B) {B};
+            \node[salle, label=45:3, right=of B] (C) {C};
+            \node[salle, label=45:5, below=of A] (D) {D};
+            \node[salle, label=45:4, below=of B] (E) {E};
+
+            \draw (E0) to node [near start,sloped,above] {\fld} (A);
+            \draw (A) to node [near start,sloped,above] {\fld} (B);
+            \draw (A) to (D);
+            \draw (B) to node [near start,sloped,above] {\fld} (C);
+            \draw (B) to (E);
+            \draw (C.south) [bend left=45] to node [near start,sloped,above] {\flg} (E.east);
+            \draw (E) to node [near start,sloped,above] {\flg} (D);
+        \end{tikzpicture}
+
+
+        \bigskip
+        Maintenant que toutes les portes et toutes les salles sont explorées, la cartographie du donjon est terminée.
+
+    \newpage
+    \section{Algorithmes}
+        \label{Algos}
+        Vous trouverez dans cette section les algorithmes que j'ai utilisé pour faire les corrections des activitées.\\
+
+        Les portes des salles seront ajoutés dans l'ordre des aiguilles d'une montre, en commançant par le Nord.
+
+        \bigskip
+
+        \subsection{Algorithme de parcours en profondeur}
+            \label{AlgoProfondeur}
+            \noindent
+            On commence un compteur de salle à 0. \\
+            On prepare la place pour une liste de portes à ouvrir. \\
+            On ajoute les portes de la salle d'entrée à la liste de portes à ouvrir. \\
+            Tant que la liste de portes à ouvrir n'est pas vide, on répéte les instructions suivantes :
+            \begin{adjustwidth}{1cm}{}
+                On regarde ce qu'il y à derrière la dernière porte de la liste. \\
+                Si cette salle a déjà été explorée :
+                \begin{adjustwidth}{1cm}{}
+                    On trace le chemin entre la salle de départ et la salle d'arrivée.
+                \end{adjustwidth}
+                Sinon (si cette salle viens d'être découverte):
+                \begin{adjustwidth}{1cm}{}
+                    On dessine la salle d'arrivée.\\
+                    On trace le chemin entre la salle de départ et la salle d'arrivée.\\
+                    On ajoute ses portes à la liste (dans l'ordre : Nord, Est, Sud, Ouest).\\
+                    On ajoute une flèche à côté du chemin, de la porte de départ vers la porte d'arrivée.
+                \end{adjustwidth}
+                On retire la porte courrante de la liste.
+            \end{adjustwidth}
+
+        \subsection{Algorithme de parcours en largeur}
+            \label{AlgoLargeur}
+            \noindent
+            On commence un compteur de salle à 0. \\
+            On prepare la place pour une liste de portes à ouvrir. \\
+            On ajoute les portes de la salle d'entrée à la liste de portes à ouvrir. \\
+            Tant que la liste de portes à ouvrir n'est pas vide, on répéte les instructions suivantes :
+            \begin{adjustwidth}{1cm}{}
+                On regarde ce qu'il y à derrière la première porte de la liste. \\
+                Si cette salle a déjà été explorée :
+                \begin{adjustwidth}{1cm}{}
+                    On trace le chemin entre la salle de départ et la salle d'arrivée.
+                \end{adjustwidth}
+                Sinon (si cette salle viens d'être découverte):
+                \begin{adjustwidth}{1cm}{}
+                    On dessine la salle d'arrivée.\\
+                    On trace le chemin entre la salle de départ et la salle d'arrivée.\\
+                    On ajoute ses portes à la liste (dans l'ordre : Nord, Est, Sud, Ouest).\\
+                    On ajoute une flèche à côté du chemin, de la porte de départ vers la porte d'arrivée.
+                \end{adjustwidth}
+                On retire la porte courrante de la liste.
+            \end{adjustwidth}
+
+\end{document}

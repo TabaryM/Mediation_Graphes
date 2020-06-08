@@ -1,0 +1,291 @@
+\documentclass{article}
+
+\usepackage[french]{babel} % pour qu'il sache qu'on écrit du français
+                           % (et s'adapte sur les espaces etc.)
+\usepackage[utf8]{inputenc} %encodage
+\usepackage{fullpage} % pour avoir de la place sur la feuille (aucunes marges)
+\usepackage{amsmath}% je l'ai utilisé pour la commande boldsymbol,
+                    % contient plein de symboles matheux
+\usepackage{pgf} % celui-ci et le suivant sont pour les graphes
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}% pour placer un noeud par rapport a un autre
+
+% les deux lignes ci-dessous définissent une macro : après ça je peux
+% utiliser \flg et \fld pour des flèches vers la gauche ou la droite
+\newcommand{\flg}{$\boldsymbol{\leftarrow}$}
+\newcommand{\fld}{$\boldsymbol{\rightarrow}$}
+
+\begin{document}
+\section{Enoncés}
+    % Donjon 1
+    \subsection{Donjon 1}
+
+    \bigskip
+    Placez l'entrée au centre de la feuille.
+    \bigskip
+
+    %Rose des vents
+    \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+        \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+            \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+        }
+        \draw[arrows={->[scale=1]}] (N) -- (S);
+        \draw[arrows={->[scale=1]}] (S) -- (N);
+        \draw[arrows={->[scale=1]}] (E) -- (W);
+        \draw[arrows={->[scale=1]}] (W) -- (E);
+    \end{tikzpicture}
+    \bigskip
+
+
+    \begin{tikzpicture}
+          \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=1.5cm]
+          \tikzstyle{salle}=[circle, draw, minimum width=1cm, align=center]
+          \tikzstyle{const}=[minimum width=1cm]
+
+          \node[entree] (E0) {Entrée};
+          \node[salle, below=of E0] (H3) {H3};
+          \node[salle, above=3 of E0] (A9) {A9};
+          \node[salle, right=3 of E0] (C8) {C8};
+          \node[salle, left=3 of E0] (L1) {L1};
+          \node[salle, right=of H3] (D2) {D2};
+          \node[salle, below=of H3] (A2) {A2};
+          \node[salle, right=of D2] (L3) {L3};
+          \node[salle, below=of D2] (A4) {A4};
+          \node[salle, below=of A2] (D0) {D0 \\ Trésor};
+          \node[salle, left=2.125 of A2] (M4) {M4};
+          \node[salle, left=2.125 of M4] (I7) {I7};
+          \node[salle, right=of C8] (E5) {E5};
+          \node[const, above=of C8] (const1) {};
+          \node[salle, above=of const1] (K0) {K0};
+          \node[const, right=of K0] (const2) {};
+          \node[salle, right=of const2] (G7) {G7};
+          \node[salle, above=of E5] (I2) {I2};
+          \node[salle, right=of E5] (J9) {J9};
+          \node[salle, above=of G7] (B6) {B6 \\ Trésor};
+          \node[salle, left=of L1] (E3) {E3};
+          \node[salle, left=of E3] (F5) {F5};
+          \node[salle, right=of A9] (B3) {B3};
+          \node[salle, above=of B3] (B5) {B5};
+          \node[salle, below=of B3] (K4) {K4 \\ Trésor};
+          \node[salle, below left=2 of A9] (A8) {A8};
+          \node[salle, above left=2 of A8] (M7) {M7};
+          \node[salle, above=of M7] (F6) {F6};
+          \node[salle, left=of M7] (H4) {H4};
+          \node[salle, left=1.125 of A8] (C1) {C1};
+          \node[salle, left=of C1] (J0) {J0 \\ Trésor};
+
+          \draw (E0) to (A9);
+          \draw (A9) to (B3);
+          \draw (B3) to (B5);
+          \draw (B3) to (K4);
+          \draw (A9) to (M7);
+          \draw (M7) to (F6);
+          \draw (M7) to (H4);
+          \draw (M7) to (C1);
+          \draw (C1) to (J0);
+          \draw (C1) to (A8);
+          \draw (C1) to (L1);
+          \draw (E0) to (L1);
+          \draw (L1) to (E3);
+          \draw (E3) to (F5);
+          \draw (E3) to (I7);
+          \draw (E0) to (C8);
+          \draw (C8) to (E5);
+          \draw (E5) to (I2);
+          \draw (E5) to (J9);
+          \draw (C8) to (K0);
+          \draw (K0) to (G7);
+          \draw (J9) to (G7);
+          \draw (G7) to (B6);
+          \draw (E0) to (H3);
+          \draw (H3) to (D2);
+          \draw (D2) to (L3);
+          \draw (D2) to (A4);
+          \draw (H3) to (A2);
+          \draw (A2) to (D0);
+          \draw (A2) to (M4);
+          \draw (M4) to (I7);
+    \end{tikzpicture}
+
+\newpage
+\section{Corrections}
+    % Donjon 1
+    \subsection{Donjon 1}
+    {\bf Parcours en largeur}
+
+    %Rose des vents
+    \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+        \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+            \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+        }
+        \draw[arrows={->[scale=1]}] (N) -- (S);
+        \draw[arrows={->[scale=1]}] (S) -- (N);
+        \draw[arrows={->[scale=1]}] (E) -- (W);
+        \draw[arrows={->[scale=1]}] (W) -- (E);
+    \end{tikzpicture}
+    \bigskip
+
+    \begin{tikzpicture}
+          \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=1.5cm]
+          \tikzstyle{salle}=[circle, draw, minimum width=1cm, align=center]
+          \tikzstyle{const}=[minimum width=1cm]
+
+          \node[entree, label=135:0, label=45:0] (E0) {Entrée};
+          \node[salle, label=135:1, label=45:3, below=of E0] (H3) {H3};
+          \node[salle, label=135:1, label=45:1, above=3 of E0] (A9) {A9};
+          \node[salle, label=135:1, label=45:2, right=3 of E0] (C8) {C8};
+          \node[salle, label=135:1, label=45:4, left=3 of E0] (L1) {L1};
+          \node[salle, label=135:2, label=45:9, right=of H3] (D2) {D2};
+          \node[salle, label=135:2, label=45:10, below=of H3] (A2) {A2};
+          \node[salle, label=135:3, label=45:20, right=of D2] (L3) {L3};
+          \node[salle, label=135:3, label=45:21, below=of D2] (A4) {A4};
+          \node[salle, label=135:3, label=45:22, below=of A2] (D0) {D0 \\ Trésor};
+          \node[salle, label=135:3, label=45:23, left=2.125 of A2] (M4) {M4};
+          \node[salle, label=135:3, label=45:26, left=2.125 of M4] (I7) {I7};
+          \node[salle, label=135:2, label=45:8, right=of C8] (E5) {E5};
+          \node[const, above=of C8] (const1) {};
+          \node[salle, label=135:2, label=45:7, above=of const1] (K0) {K0};
+          \node[const, right=of K0] (const2) {};
+          \node[salle, label=135:3, label=45:17, right=of const2] (G7) {G7};
+          \node[salle, label=135:3, label=45:18, above=of E5] (I2) {I2};
+          \node[salle, label=135:3, label=45:19, right=of E5] (J9) {J9};
+          \node[salle, label=135:4, label=45:28, above=of G7] (B6) {B6 \\ Trésor};
+          \node[salle, label=135:2, label=45:12, left=of L1] (E3) {E3};
+          \node[salle, label=135:3, label=45:27, left=of E3] (F5) {F5};
+          \node[salle, label=135:2, label=45:5, right=of A9] (B3) {B3};
+          \node[salle, label=135:3, label=45:13, above=of B3] (B5) {B5};
+          \node[salle, label=135:3, label=45:14, below=of B3] (K4) {K4 \\ Trésor};
+          \node[salle, label=135:3, label=45:24, below left=2 of A9] (A8) {A8};
+          \node[salle, label=135:2, label=45:6, above left=2 of A8] (M7) {M7};
+          \node[salle, label=135:3, label=45:15, above=of M7] (F6) {F6};
+          \node[salle, label=135:3, label=45:16, left=of M7] (H4) {H4};
+          \node[salle, label=135:2, label=45:11, left=1.125 of A8] (C1) {C1};
+          \node[salle, label=135:3, label=45:25, left=of C1] (J0) {J0 \\ Trésor};
+
+          \draw (E0) to node [near start, sloped, above] {\fld} (A9);
+          \draw (A9) to node [near start, sloped, above] {\fld} (B3);
+          \draw (B3) to node [near start, sloped, above] {\fld} (B5);
+          \draw (B3) to node [near start, sloped, above] {\fld} (K4);
+          \draw (A9) to node [very near start, sloped, above] {\flg} (M7);
+          \draw (M7) to node [near start, sloped, above] {\fld} (F6);
+          \draw (M7) to node [near start, sloped, above] {\flg} (H4);
+          \draw (M7) to (C1);
+          \draw (C1) to node [near start, sloped, above] {\flg} (J0);
+          \draw (C1) to node [near start, sloped, above] {\fld} (A8);
+          \draw (C1) to node [near end, sloped, above] {\fld} (L1);
+          \draw (E0) to node [near start, sloped, above] {\flg} (L1);
+          \draw (L1) to node [near start, sloped, above] {\flg} (E3);
+          \draw (E3) to node [near start, sloped, above] {\flg} (F5);
+          \draw (E3) to node [near start, sloped, above] {\fld} (I7);
+          \draw (E0) to node [near start, sloped, above] {\fld} (C8);
+          \draw (C8) to node [near start, sloped, above] {\fld} (E5);
+          \draw (E5) to node [near start, sloped, above] {\fld} (I2);
+          \draw (E5) to node [near start, sloped, above] {\fld} (J9);
+          \draw (C8) to node [near start, sloped, above] {\fld} (K0);
+          \draw (K0) to node [near start, sloped, above] {\fld} (G7);
+          \draw (J9) to (G7);
+          \draw (G7) to node [near start, sloped, above] {\fld} (B6);
+          \draw (E0) to node [near start, sloped, above] {\fld} (H3);
+          \draw (H3) to node [near start, sloped, above] {\fld} (D2);
+          \draw (D2) to node [near start, sloped, above] {\fld} (L3);
+          \draw (D2) to node [near start, sloped, above] {\fld} (A4);
+          \draw (H3) to node [near start, sloped, above] {\fld} (A2);
+          \draw (A2) to node [near start, sloped, above] {\fld} (D0);
+          \draw (A2) to node [near start, sloped, above] {\flg} (M4);
+          \draw (M4) to (I7);
+    \end{tikzpicture}
+
+    \newpage
+    {\bf Parcours en profondeur}\\
+    Nombre de portes traversées: \\
+    En suivant l'algorithme : 56 \\
+    Au mieux : 46
+    \bigskip
+
+    %Rose des vents
+    \begin{tikzpicture}[rotate=90, scale=0.35, every node/.style={scale=0.6}]
+        \foreach   \direction/\label in {0/N, 90/E, 180/S, 270/W}{
+            \node[fill=green!10] at ( -\direction : 15mm) (\label) {\label};
+        }
+        \draw[arrows={->[scale=1]}] (N) -- (S);
+        \draw[arrows={->[scale=1]}] (S) -- (N);
+        \draw[arrows={->[scale=1]}] (E) -- (W);
+        \draw[arrows={->[scale=1]}] (W) -- (E);
+    \end{tikzpicture}
+    \bigskip
+
+    \begin{tikzpicture}
+          \tikzstyle{entree}=[circle, thick, draw=blue!75, fill=blue!10
+                             , minimum width=1.5cm]
+          \tikzstyle{salle}=[circle, draw, minimum width=1cm, align=center]
+          \tikzstyle{const}=[minimum width=1cm]
+
+          \node[entree] (E0) {Entrée};
+          \node[salle, label=45:14, below=of E0] (H3) {H3};
+          \node[salle, label=45:1, above=3 of E0] (A9) {A9};
+          \node[salle, label=45:22, right=3 of E0] (C8) {C8};
+          \node[salle, label=45:9, left=3 of E0] (L1) {L1};
+          \node[salle, label=45:15, right=of H3] (D2) {D2};
+          \node[salle, label=45:13, below=of H3] (A2) {A2};
+          \node[salle, label=45:16, right=of D2] (L3) {L3};
+          \node[salle, label=45:17, below=of D2] (A4) {A4};
+          \node[salle, label=45:18, below=of A2] (D0) {D0 \\ Trésor};
+          \node[salle, label=45:12, left=2.125 of A2] (M4) {M4};
+          \node[salle, label=45:11, left=2.125 of M4] (I7) {I7};
+          \node[salle, label=45:27, right=of C8] (E5) {E5};
+          \node[const, above=of C8] (const1) {};
+          \node[salle, label=45:23, above=of const1] (K0) {K0};
+          \node[const, right=of K0] (const2) {};
+          \node[salle, label=45:24, right=of const2] (G7) {G7};
+          \node[salle, label=45:28, above=of E5] (I2) {I2};
+          \node[salle, label=45:26, right=of E5] (J9) {J9};
+          \node[salle, label=45:25, above=of G7] (B6) {B6 \\ Trésor};
+          \node[salle, label=45:10, left=of L1] (E3) {E3};
+          \node[salle, label=45:19, left=of E3] (F5) {F5};
+          \node[salle, label=45:2, right=of A9] (B3) {B3};
+          \node[salle, label=45:3, above=of B3] (B5) {B5};
+          \node[salle, label=45:4, below=of B3] (K4) {K4 \\ Trésor};
+          \node[salle, label=45:8, below left=2 of A9] (A8) {A8};
+          \node[salle, label=45:5, above left=2 of A8] (M7) {M7};
+          \node[salle, label=45:6, above=of M7] (F6) {F6};
+          \node[salle, label=45:21, left=of M7] (H4) {H4};
+          \node[salle, label=45:7, left=1.125 of A8] (C1) {C1};
+          \node[salle, label=45:20, left=of C1] (J0) {J0 \\ Trésor};
+
+          \draw (E0) to node [near start, sloped, above] {\fld} (A9);
+          \draw (A9) to node [near start, sloped, above] {\fld} (B3);
+          \draw (B3) to node [near start, sloped, above] {\fld} (B5);
+          \draw (B3) to node [near start, sloped, above] {\fld} (K4);
+          \draw (A9) to node [near start, sloped, above] {\flg} (M7);
+          \draw (M7) to node [near start, sloped, above] {\fld} (F6);
+          \draw (M7) to node [near start, sloped, above] {\flg} (H4);
+          \draw (M7) to node [near start, sloped, above] {\flg} (C1);
+          \draw (C1) to node [near start, sloped, above] {\flg} (J0);
+          \draw (C1) to node [near start, sloped, above] {\fld} (A8);
+          \draw (C1) to node [near start, sloped, above] {\flg} (L1);
+          \draw (E0) to (L1);
+          \draw (L1) to node [near start, sloped, above] {\flg} (E3);
+          \draw (E3) to node [near start, sloped, above] {\flg} (F5);
+          \draw (E3) to node [near start, sloped, above] {\fld} (I7);
+          \draw (E0) to node [near start, sloped, above] {\fld} (C8);
+          \draw (C8) to (E5);
+          \draw (E5) to node [near start, sloped, above] {\fld} (I2);
+          \draw (E5) to node [near end, sloped, above] {\flg} (J9);
+          \draw (C8) to node [near start, sloped, above] {\fld} (K0);
+          \draw (K0) to node [near start, sloped, above] {\fld} (G7);
+          \draw (J9) to node [near end, sloped, above] {\flg} (G7);
+          \draw (G7) to node [near start, sloped, above] {\fld} (B6);
+          \draw (E0) to (H3);
+          \draw (H3) to node [near start, sloped, above] {\fld} (D2);
+          \draw (D2) to node [near start, sloped, above] {\fld} (L3);
+          \draw (D2) to node [near start, sloped, above] {\fld} (A4);
+          \draw (H3) to node [near end, sloped, above] {\flg} (A2);
+          \draw (A2) to node [near start, sloped, above] {\fld} (D0);
+          \draw (A2) to node [near end, sloped, above] {\fld} (M4);
+          \draw (M4) to node [near end, sloped, above] {\fld} (I7);
+    \end{tikzpicture}
+
+\end{document}
