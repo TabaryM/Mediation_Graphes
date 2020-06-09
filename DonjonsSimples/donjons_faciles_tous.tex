@@ -10,6 +10,28 @@
 \usepackage{pgf} % celui-ci et le suivant sont pour les graphes
 \usepackage{tikz}
 
+\usepackage{fancyhdr} % Pour la mise en page des en-tête et pieds de pages
+% Package ajoutant la licence de partage et d'utilisation du document
+\usepackage[
+    type={CC},
+    modifier={by-sa},
+    version={4.0},
+]{doclicense}
+
+% Pour ajouter le logo aux pieds de pages
+\usepackage[scale=2.0]{ccicons}
+
+% Creation du pied de page :
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{Mathieu Tabary}
+\cfoot{\thepage}
+\rfoot{\ccbysa}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
 \usetikzlibrary{positioning}% pour placer un noeud par rapport a un autre
 
 % les deux lignes ci-dessous définissent une macro : après ça je peux

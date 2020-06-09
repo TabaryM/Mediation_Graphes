@@ -1,7 +1,10 @@
 # Qu'y a-t'il dans ce donjon ?
 
 Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution 4.0 International”
-[![License: CC BY 4.0](https://licensebuttons.net/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)<br>
+
+Cette activité a été créée par Mathieu Tabary
+
+[![License: CC BY 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)<br>
 
 ## Notions abordées
 Cette activité a pour but de faire découvrir les algorithmes de parcours de graphes en largeur et en profondeur.
