@@ -1,12 +1,5 @@
 # Qu'y a-t'il dans ce donjon ?
 
-Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution 4.0 International”<br>
-[![License: CC BY 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)<br>
-
-
-Cette activité a été créée par Mathieu Tabary.
-Vous pouvez trouver la version originale sur son [GitHub](https://github.com/TabaryM/Mediation_Graphes/blob/master/README.md)
-
 ## Notions abordées
 Cette activité a pour but de faire découvrir les algorithmes de parcours de graphes en largeur et en profondeur.
 Elle peu être utilisé comme première approche pour les graphes et/ou les algorithmes.
@@ -53,3 +46,12 @@ Avec une telle configuration, il est possible de faire des recherches de chemin 
 [Moyen](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsMoyens/donjons_moyen_tous.pdf),
 [Difficiles](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsDifficiles/donjons_difficiles_tous.pdf)
 - D'autres activité de médiations de sciences informatiques sans ordinateur : [Médiation](https://members.loria.fr/MDuflot/files/med/)
+
+## Partage et droits
+
+Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution 4.0 International”<br>
+[![License: CC BY 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)<br>
+
+
+Cette activité a été créée par Mathieu Tabary.
+Vous pouvez trouver la version originale sur son [GitHub](https://github.com/TabaryM/Mediation_Graphes/blob/master/README.md)
