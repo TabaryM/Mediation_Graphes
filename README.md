@@ -41,6 +41,12 @@ Cette dernière contrainte permet d'aider les élèves à trouver un algorithme 
 
 Pour faire découvrir le parcours en largeur, on peut retirer cette dernière contrainte (i.e : ne plus utiliser le jeton), et demander aux élèves de calculer la plus courte distance depuis l'entrée et n'importe quelle salle.
 
+## Extensions
+Il est possible de décliner cette activité afin de faire découvrir d'autres algorithmes et théories sur les graphes. Par exemple :
+- Les graphes orientés : en expliquant que les portes sont a sens uniques (des portes styles "sorties de secours" qui empêchent de faire marche arrière).
+- Les graphes pondérés : en situant les donjons dans une caverne, ou un terrain accidenté, ainsi emprunter un chemin accidenté est plus long (a un coût en temps).  
+Avec une telle configuration, il est possible de faire des recherches de chemin à coût minimum.
+
 ## Liens
 - Vous trouverez le document décrivant l'activité en détails [ici](https://github.com/TabaryM/Mediation_Graphes/blob/master/Atelier/atelier_donjons.pdf) avec un exemple d'exploration d'un donjon assez petit, une exeplication sur les distances à exprimer pour les couloirs fourbes, ainsi que qu'un algorithme de parcours en profondeur et un agorithme de parcours en largeur, tout deux utilisés pour faire les "corrections" des parcours des donjons [Facile](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsSimple/donjons_faciles_tous.pdf),
 [Moyen](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsMoyens/donjons_moyen_tous.pdf),
