@@ -1,6 +1,6 @@
 # Qu'y a-t'il dans ce donjon ?
 
-Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution 4.0 International”
+Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution 4.0 International”<br>
 [![License: CC BY 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)<br>
 
 
