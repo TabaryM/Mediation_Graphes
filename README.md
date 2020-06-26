@@ -42,15 +42,15 @@ Il est possible de décliner cette activité afin de faire découvrir d'autres a
 Avec une telle configuration, il est possible de faire des recherches de chemin à coût minimum.
 
 ## Liens
-- Vous trouverez le document décrivant l'activité en détails [ici](https://github.com/TabaryM/Mediation_Graphes/blob/master/Atelier/atelier_donjons.pdf) avec un exemple d'exploration d'un donjon assez petit, une exeplication sur les distances à exprimer pour les couloirs fourbes, ainsi que qu'un algorithme de parcours en profondeur et un agorithme de parcours en largeur, tout deux utilisés pour faire les "corrections" des parcours des donjons [Facile](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsSimple/donjons_faciles_tous.pdf),
-[Moyen](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsMoyens/donjons_moyen_tous.pdf),
+- Vous trouverez le document décrivant l'activité en détails [ici](https://github.com/TabaryM/Mediation_Graphes/blob/master/Atelier/atelier_donjons.pdf) avec un exemple d'exploration d'un donjon assez petit, une exeplication sur les distances à exprimer pour les couloirs fourbes, ainsi que qu'un algorithme de parcours en profondeur et un agorithme de parcours en largeur, tout deux utilisés pour faire les "corrections" des parcours des donjons [Facile](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsSimples/donjons_faciles_tous.pdf),
+[Moyen](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsMoyens/donjons_moyens_tous.pdf),
 [Difficiles](https://github.com/TabaryM/Mediation_Graphes/blob/master/DonjonsDifficiles/donjons_difficiles_tous.pdf)
 - D'autres activité de médiations de sciences informatiques sans ordinateur : [Médiation](https://members.loria.fr/MDuflot/files/med/)
 
 ## Partage et droits
 
-Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution 4.0 International”<br>
-[![License: CC BY 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)<br>
+Ce document et les documents liés sont mis à disposition selon les termes de la licence Creative Commons “Attribution - Partage dans les mêmes conditions 4.0 International”<br>
+[![License: CC BY SA 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)<br>
 
 
 Cette activité a été créée par Mathieu Tabary.
